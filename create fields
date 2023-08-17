@@ -1,0 +1,14 @@
+POST /services/data/vXX.X/tooling/sobjects/CustomField HTTP/1.1
+Host: instance.salesforce.com
+Authorization: Bearer <access_token>
+Content-Type: application/json
+{
+    "Metadata": {
+        "type": "CustomField",
+        "fullName": "Insurance_Policy__c.Policy_Number__c",
+        "label": "Policy Number",
+        "type": "Text",
+        "length": 20,
+        "required": true
+    }
+}
