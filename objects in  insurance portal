@@ -1,0 +1,39 @@
+access_token = "YOUR_ACCESS_TOKEN"
+instance_url = "YOUR_INSTANCE_URL"
+object_definition = {
+    "label": "Insurance Policy",
+    "pluralLabel": "Insurance Policies",
+    "name": "Insurance_Policy__c",
+    "keyPrefix": "IP",
+    "fields": [
+        {
+            "fullName": "Policy_Number__c",
+            "label": "Policy Number",
+            "type": "AutoNumber"
+        },
+        {
+            "fullName": "Policy_Type__c",
+            "label": "Policy Type",
+            "type": "Picklist",
+            "picklist": {
+                "picklistValues": [
+                    {
+                        "fullName": "Auto",
+                        "default": True
+                    },
+                    {
+                        "fullName": "Home"
+                    }
+                ]
+            }
+        }
+        # Add more fields as needed
+    ]
+}
+object_url = f"{instance_url}/services/data/v54.0/tooling/sobjects/CustomObject"
+headers = {
+    "Authorization": f"Bearer {access_token}",
+    "Content-Type": "application/json"
+}
+response = requests.post(object_url, headers=headers, data=json.dumps(object_definition))
+print(response.json())
