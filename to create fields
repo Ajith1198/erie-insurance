@@ -1,0 +1,8 @@
+field_definition = {
+    "fullName": "Coverage_Amount__c",
+    "label": "Coverage Amount",
+    "type": "Currency"
+}
+field_url = f"{instance_url}/services/data/v54.0/tooling/sobjects/CustomField"
+response = requests.post(field_url, headers=headers, data=json.dumps(field_definition))
+print(response.json())
