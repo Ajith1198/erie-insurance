@@ -1,0 +1,35 @@
+const fieldDefinitions = [
+  {
+    fullName: `${objectName}.Policy_Number__c`,
+    label: 'Policy Number',
+    type: 'Text',
+    length: 20
+  },
+  {
+    fullName: `${objectName}.Policy_Type__c`,
+    label: 'Policy Type',
+    type: 'Picklist',
+    picklist: {
+      picklistValues: [
+        { fullName: 'Homeowners', default: true },
+        { fullName: 'Auto' }
+      ]
+    }
+  }
+];
+async function createCustomFields() {
+  try {
+    for (const fieldDefinition of fieldDefinitions) {
+      const response = await axios.post(`${createObjectUrl}/describe/layouts`, fieldDefinition, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json'
+        }
+      });
+      console.log('Custom field created:', response.data);
+    }
+  } catch (error) {
+    console.error('Error creating custom fields:', error);
+  }
+}
+await createCustomFields();
