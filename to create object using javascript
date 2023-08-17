@@ -1,0 +1,26 @@
+const objectName = 'Insurance_Policy__c';
+const createObjectUrl = `https://your-instance.salesforce.com/services/data/vXX.X/sobjects/${objectName}`;
+
+const objectDefinition = {
+  fullName: objectName,
+  label: 'Insurance Policy',
+  pluralLabel: 'Insurance Policies',
+  deploymentStatus: 'Deployed',
+  sharingModel: 'ReadWrite'
+};
+async function createCustomObject() {
+  try {
+    const response = await axios.post(createObjectUrl, objectDefinition, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/json'
+      }
+    });
+    console.log('Custom object created:', response.data);
+  } catch (error) {
+    console.error('Error creating custom object:', error);
+  }
+}
+await createCustomObject();
+
+
